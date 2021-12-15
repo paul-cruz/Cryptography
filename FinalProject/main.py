@@ -4,6 +4,7 @@ from Utils import Utils
 from RSA import RSASigner
 from AES import AESCipher
 import sys
+import os
 sys.path.append('.')
 
 
@@ -178,6 +179,9 @@ class Window(QtWidgets.QMainWindow):
             Utils.concat_aes_encrypted_key(encrypted_key, out_path)
 
             result = signer.sign_file(out_path)
+
+            os.remove(out_path)
+
             self.custom_dialog('Result', f'Encrypted and {result}')
         except Exception as e:
             self.custom_dialog('Error', str(e))
@@ -206,6 +210,9 @@ class Window(QtWidgets.QMainWindow):
                 new_file)
             key = descipher.decrypt(key)
             out_path = cipher.decrypt_file(encrypted_file_path, key)
+
+            os.remove(encrypted_file_path)
+            os.remove(new_file)
 
             self.custom_dialog(
                 'Encrypt Result', f'Decrypted file generated as {out_path}')

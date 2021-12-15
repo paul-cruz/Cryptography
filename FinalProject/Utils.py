@@ -28,7 +28,7 @@ class Utils:
         return content[-Utils.ENCRYPTED_AES_KEY_SIZE:], aux_path
 
     @staticmethod
-    def remove_rsa_key_from_encrypted_file(file_path: str) -> Tuple[str, str]:
+    def remove_rsa_key_from_encrypted_file(file_path: str) -> str:
         aux_path = Utils.get_custom_path(file_path, '_')
         with open(file_path, 'rb') as f:
             content = f.read()
