@@ -172,9 +172,10 @@ class Window(QtWidgets.QMainWindow):
                 return
 
             signer = RSASigner(signer_key_path)
+            reciver = RSASigner(target_key_path)
             cipher = AESCipher()
             key = cipher.key
-            encrypted_key = signer.encrypt(key)
+            encrypted_key = reciver.encrypt(key)
             out_path = cipher.encrypt_file(file_path, key)
             Utils.concat_aes_encrypted_key(encrypted_key, out_path)
 
